@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cio0rq54ak514"]
 
-[ext_resource type="PackedScene" uid="uid://bcdy3jit76mb1" path="res://Main/Player/Player.tscn" id="1_gstxq"]
+[ext_resource type="PackedScene" uid="uid://d2sl6aqkcnmqv" path="res://Main/UI/UI.tscn" id="1_qdvvc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_l10qt"]
 size = Vector2(40, 40)
@@ -19,4 +19,15 @@ mesh = SubResource("PlaneMesh_l10qt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ie6nf")
 
-[node name="Player" parent="." instance=ExtResource("1_gstxq")]
+[node name="mmenu" parent="." instance=ExtResource("1_qdvvc")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22852421, 0)
+light_color = Color(1, 0, 0, 1)
+light_energy = 1.635
+omni_range = 12.154
+omni_attenuation = 0.223
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bcdy3jit76mb1")
+spawn_path = NodePath("..")

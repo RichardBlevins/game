@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bcdy3jit76mb1"]
+[gd_scene load_steps=7 format=3 uid="uid://bcdy3jit76mb1"]
 
 [ext_resource type="Script" uid="uid://bixbn0xf4jm2i" path="res://Main/Player/player.gd" id="1_wyc5r"]
 [ext_resource type="Texture2D" uid="uid://1d7eexj3bkmg" path="res://icon.svg" id="2_vpmj6"]
@@ -11,7 +11,16 @@ albedo_texture = ExtResource("2_vpmj6")
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_irbuk"]
 material = SubResource("StandardMaterial3D_52h5g")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wyc5r"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_wyc5r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -23,3 +32,6 @@ mesh = SubResource("CapsuleMesh_irbuk")
 [node name="Cam" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Cam"]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wyc5r")

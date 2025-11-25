@@ -17,11 +17,17 @@ var captured: bool = true
 #Nodes
 @onready var camera = $Cam/Camera3D
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(str(name).to_int())
 
 func _ready() -> void:
+	if not is_multiplayer_authority(): return
+	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	camera.current = true
 
 func _physics_process(delta):
+	if not is_multiplayer_authority(): return
 	_movement_handler(delta)
 	_menu_handler()
 
@@ -41,6 +47,7 @@ func _movement_handler(delta) -> void:
 		velocity.y = jump_speed
 
 func _input(event):
+	if not is_multiplayer_authority(): return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)

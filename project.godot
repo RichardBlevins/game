@@ -15,10 +15,6 @@ run/main_scene="uid://cio0rq54ak514"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-NetworkHandler="*res://Main/Network/scripts/network_handler.gd"
-
 [input]
 
 forward={
