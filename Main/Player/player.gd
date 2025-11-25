@@ -1,0 +1,59 @@
+extends CharacterBody3D
+
+
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+
+#Player values
+@export var walk_speed = 5.0
+@export var sprint_speed = 8.0
+@export var crouch_speed = 3.0
+@export var jump_speed = 4.5
+@export var mouse_sensitivity = 0.002
+
+#player states
+
+var captured: bool = true
+
+#Nodes
+@onready var camera = $Cam/Camera3D
+
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _physics_process(delta):
+	_movement_handler(delta)
+	_menu_handler()
+
+#==================================
+#    MOVEMENT
+#==================================
+
+func _movement_handler(delta) -> void:
+	velocity.y += -gravity * delta
+	var input = Input.get_vector("left", "right", "forward", "backward")
+	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
+	velocity.x = movement_dir.x * walk_speed
+	velocity.z = movement_dir.z * walk_speed
+
+	move_and_slide()
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		velocity.y = jump_speed
+
+func _input(event):
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		rotate_y(-event.relative.x * mouse_sensitivity)
+		camera.rotate_x(-event.relative.y * mouse_sensitivity)
+		camera.rotation.x = clampf(camera.rotation.x, -deg_to_rad(70), deg_to_rad(70))
+
+#==================================
+#    Menu Handler
+#==================================
+
+func _menu_handler() -> void:
+	if Input.is_action_just_pressed("menu"):
+		toggle_mouse_capture()
+		
+func toggle_mouse_capture():
+	captured = !captured
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if captured else Input.MOUSE_MODE_VISIBLE
