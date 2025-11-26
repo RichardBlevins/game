@@ -19,7 +19,7 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="RigidBody3D"]
 collision_layer = 2
 script = ExtResource("1_wyc5r")
 
@@ -32,6 +32,7 @@ mesh = SubResource("CapsuleMesh_irbuk")
 [node name="Cam" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Cam"]
+current = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wyc5r")

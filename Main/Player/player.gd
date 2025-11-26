@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends RigidBody3D
 
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -36,15 +36,7 @@ func _physics_process(delta):
 #==================================
 
 func _movement_handler(delta) -> void:
-	velocity.y += -gravity * delta
-	var input = Input.get_vector("left", "right", "forward", "backward")
-	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
-	velocity.x = movement_dir.x * walk_speed
-	velocity.z = movement_dir.z * walk_speed
-
-	move_and_slide()
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = jump_speed
+	pass
 
 func _input(event):
 	if not is_multiplayer_authority(): return
