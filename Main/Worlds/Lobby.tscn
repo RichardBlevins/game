@@ -31,3 +31,6 @@ omni_attenuation = 0.223
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://bcdy3jit76mb1")
 spawn_path = NodePath("..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.95354885, 0.3012384, 0, -0.3012384, 0.95354885, 0.37746143, 4.4656534, 12.464382)

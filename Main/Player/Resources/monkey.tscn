@@ -1,22 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://bcdy3jit76mb1"]
+[gd_scene load_steps=6 format=4 uid="uid://cnkwevdp4ekhd"]
 
-[ext_resource type="Script" uid="uid://bixbn0xf4jm2i" path="res://Main/Player/player.gd" id="1_wyc5r"]
-[ext_resource type="Texture2D" uid="uid://cy7bmmxcrk1kc" path="res://Main/Player/Resources/texture_0.png" id="2_wyc5r"]
+[ext_resource type="Texture2D" uid="uid://cy7bmmxcrk1kc" path="res://Main/Player/Resources/texture_0.png" id="1_ph8ff"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wyc5r"]
-radius = 0.19726563
-height = 0.6360779
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wyc5r"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vpmj6"]
-albedo_texture = ExtResource("2_wyc5r")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6f5xc"]
+albedo_texture = ExtResource("1_ph8ff")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vs1v"]
 resource_name = "Division_0_0"
@@ -39,7 +26,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_n21ks"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_rfswn"]
 resource_name = "Division_0_0"
 _surfaces = [{
 "aabb": AABB(-1138.99, -210.502, -1721.06, 2277.98, 631.081, 1725.5282),
@@ -57,36 +44,18 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jnjk1")
 
-[node name="Player" type="RigidBody3D"]
-collision_layer = 2
-script = ExtResource("1_wyc5r")
+[node name="monkey" type="Node3D"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28565842, -0.013743281)
-shape = SubResource("CapsuleShape3D_wyc5r")
-
-[node name="Cam" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="Cam"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56119186, -0.07689348)
-current = true
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_wyc5r")
-
-[node name="Monkey" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8184372, 0)
-
-[node name="Mesh" type="MeshInstance3D" parent="Monkey"]
-transform = Transform3D(-0.001, -1.5099581e-10, 6.6002366e-18, 0, -4.371139e-11, -0.001, 1.5099581e-10, -0.001, 4.371139e-11, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_vpmj6")
-mesh = SubResource("ArrayMesh_n21ks")
+[node name="Division_0_0" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0, -0.01, 0, 0.01, 0, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_6f5xc")
+mesh = SubResource("ArrayMesh_rfswn")
 skeleton = NodePath("")
 
-[node name="Armature" type="Node3D" parent="Monkey"]
-transform = Transform3D(-0.001, 8.742278e-11, 3.821371e-18, 0, -4.371139e-11, 0.001, 8.742278e-11, 0.001, 4.371139e-11, 0, 14.932891, 0)
+[node name="Armature" type="Node3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 0, 100, 0, -100, 0, 0, 14.932891, 0)
 
-[node name="Skeleton3D" type="Skeleton3D" parent="Monkey/Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Armature"]
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, -5.810927e-17, 1.5824101e-16, 5.810931e-17, -0.7623465, -0.6471692, 1.5824101e-16, 0.6471692, -0.7623465, 0, 0, -0.0070549105)

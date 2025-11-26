@@ -36,7 +36,12 @@ func _physics_process(delta):
 #==================================
 
 func _movement_handler(delta) -> void:
-	pass
+
+	var input = Input.get_vector("left", "right", "forward", "backward")
+	var movement_dir = transform.basis * Vector3(input.x, 0, input.y)
+
+	if Input.is_action_just_pressed("jump"):
+		pass
 
 func _input(event):
 	if not is_multiplayer_authority(): return
