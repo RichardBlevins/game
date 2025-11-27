@@ -11,7 +11,7 @@ data = PackedVector3Array(20, 0, 20, -20, 0, 20, 20, 0, -20, -20, 0, 20, -20, 0,
 [node name="Lobby" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3292698, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.649261, 0)
 mesh = SubResource("PlaneMesh_l10qt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
@@ -31,3 +31,6 @@ omni_attenuation = 0.223
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://bcdy3jit76mb1")
 spawn_path = NodePath("..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.63136625, 0.7754847, 0, -0.7754847, 0.63136625, 0, 12.692976, 17.956379)

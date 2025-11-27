@@ -30,6 +30,7 @@ func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	_movement_handler(delta)
 	_menu_handler()
+	
 
 #==================================
 #    MOVEMENT
